@@ -6,8 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Iterator;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Vocabulario{
 	
@@ -17,13 +18,25 @@ public class Vocabulario{
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(args[0]));
 			PrintWriter writer = new PrintWriter(new FileWriter("vocabulario"));
+			
+			Pattern word_pattern = Pattern.compile("\\w+'\\w+|(?<=\\p{Punct}).?+(?=\\p{Punct})|(?<=\\p{Punct}).?+|.?+(?=\\p{Punct})");
  			
 			while(reader.ready()) {
 				String cadena = reader.readLine();
 				String[] tokens = cadena.split("\\s+");
 				
-				for(int i = 0; i <  tokens.length; i++)
-					set.add(tokens[i]);
+				for(int i = 0; i <  tokens.length; i++) {
+				  String dummy = tokens[i];
+				  Matcher matcher = word_pattern.matcher(tokens[i]);
+				  if (matcher.find()) {
+	          dummy = matcher.group();
+				  }
+
+				  
+				  if (!dummy.startsWith("http")) {
+	          set.add(dummy.toLowerCase());
+				  }
+				}	
 			}
 			
 			writer.println(set.size());
