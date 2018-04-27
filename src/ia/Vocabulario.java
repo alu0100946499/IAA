@@ -10,6 +10,15 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Programa para generar el vocabulario con el que se trabaja.
+ * Dentro del vocabulario se eliminan las url's, los signos de puntuación
+ * como comas, puntos, etc... excepto el uso del genitivo sajón en palabras inglesas,
+ * así como contracciones y palabra compuestas.
+ * @author Javier Esteban Pérez Rivas
+ * @author Sara Revilla Báez
+ *
+ */
 public class Vocabulario{
 	
 	
@@ -19,7 +28,7 @@ public class Vocabulario{
 			BufferedReader reader = new BufferedReader(new FileReader(args[0]));
 			PrintWriter writer = new PrintWriter(new FileWriter("vocabulario"));
 			
-			Pattern word_pattern = Pattern.compile("\\w+'\\w+|(?<=\\p{Punct}).?+(?=\\p{Punct})|(?<=\\p{Punct}).?+|.?+(?=\\p{Punct})");
+			Pattern word_pattern = Pattern.compile("\\w+'\\w+|(?<=\\p{Punct})\\w?+(?=\\p{Punct})|(?<=\\p{Punct})\\w?+|\\w?+(?=\\p{Punct})");
  			
 			while(reader.ready()) {
 				String cadena = reader.readLine();
