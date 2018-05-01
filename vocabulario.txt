@@ -1,5 +1,4 @@
 3681
-
 0
 000
 00800
@@ -366,7 +365,7 @@ awards
 awareness
 away
 awesome
-aÃ¥Ãªnew
+aã¥ãšnew
 b
 babies
 baby
@@ -563,7 +562,7 @@ bw
 by
 c
 cachet
-cafÃ©
+cafã©
 cali
 califf
 call
@@ -603,7 +602,7 @@ cases
 cash
 cast
 cat
-catalÃ¡n
+catalã¡n
 catch
 category
 caught
@@ -624,7 +623,7 @@ centers
 central
 centre
 centro
-centrumÃ¥Â¨
+centrumã¥â¨
 ceo
 ceos
 certain
@@ -696,7 +695,7 @@ citigroup
 citigroup's
 citiphone
 citizens
-citiÃ¥Â¨
+citiã¥â¨
 city
 civic
 cl
@@ -1439,7 +1438,7 @@ friends
 fringe
 from
 froman
-fromÃ¥Ãª
+fromã¥ãš
 fruit
 fsa
 ft
@@ -1887,7 +1886,7 @@ kevin
 key
 keynote
 keys
-keysÃ¥Ãªon
+keysã¥ãšon
 kick
 kicks
 kickstart
@@ -2256,10 +2255,10 @@ negative
 negotiating
 nelson
 neocate
-nescafÃ©
+nescafã©
 nesquik
 nestle
-nestlÃ©
+nestlã©
 network
 networking
 networks
@@ -2284,7 +2283,7 @@ nikko
 nina
 nine
 nixon
-niÃ¬Â±os
+niãœâ±os
 no
 nomination
 nominees
@@ -2302,17 +2301,17 @@ nudging
 number
 numbers
 nurture
-nutriciiÃ³n
+nutriciiã³n
 nutrient
 nutrimed
 nutrition
 nutrition's
 nutritional
-nutritionÃ¥Â¨
+nutritionã¥â¨
 nvq
 nyc
 nytimes
-nÃ¥Â¡1
+nã¥â¡1
 o
 obama
 obesity
@@ -3007,7 +3006,7 @@ signed
 significantly
 silos
 silver
-silverÃ¥Â¨
+silverã¥â¨
 similar
 simple
 simply
@@ -3677,6 +3676,7 @@ youtube
 yr
 yrs
 z
-Â£1
-Â£65k
-Ã¡rboles
+â£1
+â£65k
+ã?rboles
+<UNK>
