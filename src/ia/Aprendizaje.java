@@ -22,7 +22,6 @@ import java.io.*;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.Enumeration;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -36,7 +35,7 @@ public class Aprendizaje {
         PrintWriter writer = null;
         try {
             reader = new BufferedReader(new FileReader(args[1]));
-            writer = new PrintWriter(new FileWriter("aprendizaje" + args[0].charAt(args[0].length() - 5)));
+            writer = new PrintWriter(new FileWriter("aprendizaje" + args[0].charAt(args[0].length() - 5) + ".txt"));
             
             int vocab_sz = Integer.parseInt(reader.readLine());
             for (int i = 0; i < vocab_sz; i++) {
