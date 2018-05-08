@@ -1,7 +1,7 @@
 package ia;
 /*
  * Programa para generar el vocabulario con el que se trabaja.
- * Dentro del vocabulario se eliminan las url's, los signos de puntuación
+ * Dentro del vocabulario se sustituyen las url's por el token <URL>, los signos de puntuación
  * como comas, puntos, etc... excepto el uso del genitivo sajón en palabras inglesas,
  * así como contracciones y palabra compuestas.
  * @author Javier Esteban Pérez Rivas
@@ -32,24 +32,30 @@ public class Vocabulario {
 			reader = new BufferedReader(new FileReader(args[0]));
 			writer = new PrintWriter(new FileWriter("vocabulario.txt"));
 			
-			Pattern word_pattern = Pattern.compile("\\w+'\\w+|(?<=\\p{Punct})\\w?+(?=\\p{Punct})|(?<=\\p{Punct})\\w?+|\\w?+(?=\\p{Punct})");
- 			
+			Pattern url_pattern = Pattern.compile("https?://.*");
+			Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
+			Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
+			
 			while(reader.ready()) {
 				String cadena = reader.readLine();
+				Matcher url_Matcher = url_pattern.matcher(cadena);
+				cadena = url_Matcher.replaceAll("<URL>");
+				Matcher punctuation_Matcher = punctuation_pattern.matcher(cadena);
+				cadena = punctuation_Matcher.replaceAll(" ");
+				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(cadena);
+				cadena = quatationMarks_Matcher.replaceAll(" ");
+
 				String[] tokens = cadena.split("\\s+");
 				
 				for(int i = 0; i <  tokens.length; i++) {
 				  String dummy = tokens[i];
-				  Matcher matcher = word_pattern.matcher(tokens[i]);
-				  if (matcher.find()) {
-	        	    dummy = matcher.group();
+				  if(dummy.equals("<URL>")) {
+					  set.add(dummy);
 				  }
+				  else
+					  set.add(dummy.toLowerCase());  
 
-				  
-				  if (!dummy.startsWith("http")) {
-	        		set.add(dummy.toLowerCase());
-				  }
-				}	
+				}
 			}
 			
 			writer.println(set.size());

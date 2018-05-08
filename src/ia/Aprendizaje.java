@@ -36,7 +36,7 @@ public class Aprendizaje {
         PrintWriter writer = null;
         try {
             reader = new BufferedReader(new FileReader(args[1]));
-            writer = new PrintWriter(new FileWriter("aprendizaje" + args[0].charAt(args[0].length() - 5)));
+            writer = new PrintWriter(new FileWriter("aprendizaje" + args[0].charAt(args[0].length() - 5) + ".txt"));
             
             int vocab_sz = Integer.parseInt(reader.readLine());
             for (int i = 0; i < vocab_sz; i++) {
@@ -45,26 +45,32 @@ public class Aprendizaje {
             reader.close();
             
             reader = new BufferedReader(new FileReader(args[0]));
-            Pattern word_pattern = Pattern.compile("<UNK>|\\w+'\\w+|(?<=\\p{Punct})\\w?+(?=\\p{Punct})|(?<=\\p{Punct})\\w?+|\\w?+(?=\\p{Punct})");
+            Pattern url_pattern = Pattern.compile("https?://.*");
+			Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
+			Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
             
             while (reader.ready()) {
 				String cadena = reader.readLine();
+				Matcher url_Matcher = url_pattern.matcher(cadena);
+				cadena = url_Matcher.replaceAll("<URL>");
+				Matcher punctuation_Matcher = punctuation_pattern.matcher(cadena);
+				cadena = punctuation_Matcher.replaceAll(" ");
+				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(cadena);
+				cadena = quatationMarks_Matcher.replaceAll(" ");
+				
 				String[] tokens = cadena.split("\\s+");
                 n_documents++;
 				
 				for (int i = 0; i < tokens.length; i++) {
     			    String dummy = tokens[i];
-    			    Matcher matcher = word_pattern.matcher(tokens[i]);
-    			    if (matcher.find()) {
-                        dummy = matcher.group();
-    			    }
-    			    
+    			   
                     if (table.get(dummy) != null) {
-                        n_words++;      // Aquí no cuenta links /To Ask
+                        n_words++;
                         table.put(dummy, table.get(dummy) + 1);
                     }
 				}	
 			}
+         
 			
 			writer.println("Número de documentos del corpus: " + n_documents);
 			writer.println("Número de palabras del corpus: " + n_words);
