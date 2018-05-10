@@ -88,6 +88,7 @@ public class Clasificacion {
                     double prob = 0;
                     // Calculo la probabilidad para la clase i
                     for (String token : tokens) {
+                        token = token.toLowerCase();
                         if (prob_table.get(i).get(token) == null)
                             token = "<UNK>";
                         prob += prob_table.get(i).get(token);

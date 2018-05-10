@@ -64,7 +64,7 @@ public class Aprendizaje {
                 n_documents++;
 				
                 for (int i = 0; i < tokens.length; i++) {
-                    String dummy = tokens[i];
+                    String dummy = tokens[i].toLowerCase();
     			   
                     if (table.get(dummy) != null) {
                         n_words++;
