@@ -33,6 +33,7 @@ public class Vocabulario {
 			writer = new PrintWriter(new FileWriter("vocabulario.txt"));
 			
 			Pattern url_pattern = Pattern.compile("https?://.*");
+			Pattern mention_pattern = Pattern.compile("(?<!\\w)@\\w+");
 			Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
 			Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
 			
@@ -40,6 +41,8 @@ public class Vocabulario {
 				String cadena = reader.readLine();
 				Matcher url_Matcher = url_pattern.matcher(cadena);
 				cadena = url_Matcher.replaceAll("<URL>");
+				Matcher mention_Matcher = mention_pattern.matcher(cadena);
+				cadena = mention_Matcher.replaceAll("<MTN>");
 				Matcher punctuation_Matcher = punctuation_pattern.matcher(cadena);
 				cadena = punctuation_Matcher.replaceAll(" ");
 				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(cadena);
@@ -49,7 +52,7 @@ public class Vocabulario {
 				
 				for(int i = 0; i <  tokens.length; i++) {
 				  String dummy = tokens[i];
-				  if(dummy.equals("<URL>")) {
+				  if(dummy.equals("<URL>") || dummy.equals("<MTN>")) {
 					  set.add(dummy);
 				  }
 				  else

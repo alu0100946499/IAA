@@ -63,6 +63,7 @@ public class Clasificacion {
             writer = new PrintWriter(new FileWriter("clasificacion.txt"));
             
             Pattern url_pattern = Pattern.compile("https?://.*");
+            Pattern mention_pattern = Pattern.compile("(?<!\\w)@\\w+");
 			Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
 			Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
             
@@ -71,6 +72,8 @@ public class Clasificacion {
                 String line = reader.readLine();
                 Matcher url_Matcher = url_pattern.matcher(line);
 				line = url_Matcher.replaceAll("<URL>");
+        Matcher mention_Matcher = mention_pattern.matcher(line);
+        line = mention_Matcher.replaceAll("<MTN>");
 				Matcher punctuation_Matcher = punctuation_pattern.matcher(line);
 				line = punctuation_Matcher.replaceAll(" ");
 				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(line);
