@@ -28,7 +28,7 @@ import java.util.regex.Pattern;
 public class Clasificacion {
 
 	public static void main(String[] args) {
-	 	BufferedReader reader = null;
+		BufferedReader reader = null;
         PrintWriter writer = null;
         
         char[] clases = new char[args.length - 1]; // D, I, A...
