@@ -11,6 +11,20 @@ import java.util.Hashtable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Programa para clasificar tweets de un corpus en distintas clases, 
+ * dados sus ficheros de probabilidades.
+ * Los ficheros de probabilidades deben terminar por X.txt, donde X es la
+ * inicial de la clase.
+ * La salida se genera en un fichero clasificacion.txt, en el que aparecen
+ * las iniciales de las clases en las que se ha clasificado cada tweet.
+ * 
+ * java corpus<opt>.txt [aprendizajeX1.txt aprendizajeX2.txt ... aprendizajeXN.txt]
+ * 
+ * @author Javier Esteban Pérez Rivas
+ * @author Sara Revilla Báez
+ *
+ */
 public class Clasificacion {
 
 	public static void main(String[] args) {
