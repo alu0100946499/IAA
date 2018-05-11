@@ -39,6 +39,9 @@ public class Clasificacion {
             // Vector de tablas Hash que contienen las probabilidades de cada palabra dentro de cada clase
             ArrayList<Hashtable<String, Double>> prob_table = new ArrayList<Hashtable<String, Double>>();  
             
+            /**
+             * Lectura de los ficheros de probabilidades
+             */
             for (int i = 1; i < args.length; ++i) {
                 clases[i - 1] = args[i].charAt(args[i].length() - 5);
                 prob_table.add(new Hashtable<String, Double>());
@@ -65,7 +68,6 @@ public class Clasificacion {
             }
             
             // Logaritmo de la probabilidad de cada clase
-            // ...
             int corpus_size = 0;
             for(int i = 0; i < clases.length; i++)
                 corpus_size += class_table.get(clases[i]);
@@ -76,28 +78,39 @@ public class Clasificacion {
             reader = new BufferedReader(new FileReader(args[0]));   // Corpus
             writer = new PrintWriter(new FileWriter("clasificacion.txt"));
             
+            /**
+			 * Expresiones Regulares para el pre-procesado
+			 */
             Pattern url_pattern = Pattern.compile("https?://.*");
             Pattern mention_pattern = Pattern.compile("(?<!\\w)@\\w+");
 			Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
 			Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
             
             while (reader.ready()) {
-                
+            	/**
+				 * Fase de preprocesado
+				 */
                 String line = reader.readLine();
                 Matcher url_Matcher = url_pattern.matcher(line);
 				line = url_Matcher.replaceAll("<URL>");
-        Matcher mention_Matcher = mention_pattern.matcher(line);
-        line = mention_Matcher.replaceAll("<MTN>");
+		        Matcher mention_Matcher = mention_pattern.matcher(line);
+		        line = mention_Matcher.replaceAll("<MTN>");
 				Matcher punctuation_Matcher = punctuation_pattern.matcher(line);
 				line = punctuation_Matcher.replaceAll(" ");
 				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(line);
 				line = quatationMarks_Matcher.replaceAll(" ");
 				
+				/**
+				 * Separación de la cadena
+				 */
                 String tokens[] = line.split("\\s+");
                 
                 String clase = null;
                 double max_prob = Double.NEGATIVE_INFINITY;
                 
+                /**
+                 * Calculo de la probabilidad del tweet. Se recorren todas las clases y se guarda la de mayor probabilidad
+                 */
                 for (int i = 0; i < clases.length; ++i) {
                     double prob = 0;
                     // Calculo la probabilidad para la clase i

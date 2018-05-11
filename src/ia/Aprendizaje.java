@@ -44,12 +44,18 @@ public class Aprendizaje {
             reader.close();
             
             reader = new BufferedReader(new FileReader(args[0]));
+            /**
+			 * Expresiones Regulares para el pre-procesado
+			 */
             Pattern url_pattern = Pattern.compile("https?://.*");
             Pattern mention_pattern = Pattern.compile("(?<!\\w)@\\w+");
       		Pattern punctuation_pattern = Pattern.compile("[\\p{Punct}&&[^'<>]]+");
       		Pattern quatationMarks_pattern = Pattern.compile("(?<!\\w)'(?=\\w)|(?<=\\w)'(?!\\w)|(?<!\\w)'(?!\\w)");
             
             while (reader.ready()) {
+            	/**
+				 * Fase de preprocesado
+				 */
         		String cadena = reader.readLine();
         		Matcher url_Matcher = url_pattern.matcher(cadena);
         		cadena = url_Matcher.replaceAll("<URL>");
@@ -60,9 +66,15 @@ public class Aprendizaje {
 				Matcher quatationMarks_Matcher = quatationMarks_pattern.matcher(cadena);
 				cadena = quatationMarks_Matcher.replaceAll(" ");
 				
+				/**
+				 * Separación de la cadena
+				 */
 				String[] tokens = cadena.split("\\s+");
                 n_documents++;
 				
+                /**
+                 * Conteo de las palabras del corpus
+                 */
                 for (int i = 0; i < tokens.length; i++) {
                     String dummy = tokens[i].toLowerCase();
     			   
